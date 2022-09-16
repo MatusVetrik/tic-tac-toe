@@ -54,14 +54,6 @@ function App() {
         Restart
       </button>
       <div className={gameOver ? "grid game-over" : "grid"}>
-        {/* <GridTile
-          gridValues={gridValues}
-          setGridMemberValue={setGridMemberValue}
-          setGridMemberImage={setGridMemberImage}
-          player={player}
-          gameOver={gameOver}
-          pos={{x:0,y:0}}
-        /> */}
         <div
           className="grid-member"
           onClick={() => {
