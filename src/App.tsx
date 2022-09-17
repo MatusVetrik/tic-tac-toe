@@ -3,6 +3,8 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 import {Grid, GridMember, Player} from "./types";
 import {gameRules} from "./rules";
+import GridTile from "./components/GridTile";
+import Header from "./components/Header";
 
 function App() {
   const initValues: Grid = [
@@ -25,6 +27,11 @@ function App() {
     if (gameRules(gridValues)) setGameOver(true);
   };
 
+  const allowSetGridMemberValue = (position: GridMember) => {
+    if (gridValues[position.x][position.y] === "" && !gameOver)
+      setGridMemberValue(position, player);
+  };
+
   const setGridMemberImage = (pos: GridMember) =>
     gridValues[pos.x][pos.y] === 1 ? (
       <img
@@ -42,100 +49,60 @@ function App() {
       <img src="/vite.svg" className="logo none" alt="None" />
     );
 
+  const restartGame = () => {
+    setGridValues(initValues);
+    setGameOver(false);
+  };
+
   return (
     <div className="App">
-      <h1> Tic Tac Toe</h1>
-      <button
-        onClick={() => {
-          setGridValues(initValues);
-          setGameOver(false);
-        }}
-      >
-        Restart
-      </button>
+      <Header restartGame={restartGame} />
       <div className={gameOver ? "grid game-over" : "grid"}>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[0][0] === "" && !gameOver)
-              setGridMemberValue({x: 0, y: 0}, player);
-          }}
-        >
-          {setGridMemberImage({x: 0, y: 0})}
-        </div>
-
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[0][1] === "" && !gameOver)
-              setGridMemberValue({x: 0, y: 1}, player);
-          }}
-        >
-          {setGridMemberImage({x: 0, y: 1})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[0][2] === "" && !gameOver)
-              setGridMemberValue({x: 0, y: 2}, player);
-          }}
-        >
-          {setGridMemberImage({x: 0, y: 2})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[1][0] === "" && !gameOver)
-              setGridMemberValue({x: 1, y: 0}, player);
-          }}
-        >
-          {setGridMemberImage({x: 1, y: 0})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[1][1] === "" && !gameOver)
-              setGridMemberValue({x: 1, y: 1}, player);
-          }}
-        >
-          {setGridMemberImage({x: 1, y: 1})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[1][2] === "" && !gameOver)
-              setGridMemberValue({x: 1, y: 2}, player);
-          }}
-        >
-          {setGridMemberImage({x: 1, y: 2})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[2][0] === "" && !gameOver)
-              setGridMemberValue({x: 2, y: 0}, player);
-          }}
-        >
-          {setGridMemberImage({x: 2, y: 0})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[2][1] === "" && !gameOver)
-              setGridMemberValue({x: 2, y: 1}, player);
-          }}
-        >
-          {setGridMemberImage({x: 2, y: 1})}
-        </div>
-        <div
-          className="grid-member"
-          onClick={() => {
-            if (gridValues[2][2] === "" && !gameOver)
-              setGridMemberValue({x: 2, y: 2}, player);
-          }}
-        >
-          {setGridMemberImage({x: 2, y: 2})}
-        </div>
+        <GridTile
+          position={{x: 0, y: 0}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 0, y: 1}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 0, y: 2}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 1, y: 0}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 1, y: 1}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 1, y: 2}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 2, y: 0}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 2, y: 1}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
+        <GridTile
+          position={{x: 2, y: 2}}
+          setGridMemberImage={setGridMemberImage}
+          allowSetGridMemberValue={allowSetGridMemberValue}
+        />
       </div>
     </div>
   );
